@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2장. 자료형과 연산자 · 쉬운 파이썬</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<style>
+:root{--py-blue:#3776AB;--py-yellow:#FFD43B;--ink:#1a2233;--ink-soft:#4a5568;--line:#e6e9f0;--bg:#f6f8fc;--card:#fff;--accent:#2f6fb0;--green:#2e9e6b;--green-bg:#e9f8f0;--amber:#b9770e;--amber-bg:#fef6e6;--red:#d64545;--purple:#6b4fbb;--purple-bg:#f1ecfb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(246,248,252,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.topbar a{color:var(--accent);text-decoration:none;font-weight:600}.topbar .crumb{color:var(--ink-soft)}
+.hero{background:linear-gradient(135deg,#3776AB,#2b5e8c);color:#fff;border-radius:20px;padding:38px 34px;margin:26px 0 30px;box-shadow:0 10px 30px rgba(55,118,171,.25)}
+.hero .tag{display:inline-block;background:var(--py-yellow);color:#3a3300;font-weight:700;font-size:13px;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.hero h1{font-size:30px;line-height:1.3;margin-bottom:10px;letter-spacing:-.5px}.hero p{opacity:.94;font-size:15.5px}
+.goals{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;margin-bottom:30px}
+.goals h2{font-size:16px;color:var(--accent);margin-bottom:12px}
+.goals ul{list-style:none}.goals li{padding:7px 0 7px 30px;position:relative;font-size:15px}
+.goals li:before{content:"✓";position:absolute;left:0;top:7px;color:var(--green);font-weight:800}
+section{margin:38px 0}
+h2.sec{font-size:23px;letter-spacing:-.4px;padding-bottom:12px;border-bottom:3px solid var(--py-yellow);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+h2.sec .n{background:var(--py-blue);color:#fff;font-size:15px;width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-size:18.5px;margin:26px 0 12px;color:var(--ink);letter-spacing:-.3px}
+p{margin:12px 0;color:var(--ink-soft)}p strong,li strong{color:var(--ink);font-weight:700}
+ul.plain{margin:12px 0 12px 4px;padding-left:22px}ul.plain li{margin:7px 0;color:var(--ink-soft)}
+.term{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--py-blue);border-radius:12px;padding:18px 22px;margin:20px 0;box-shadow:0 2px 8px rgba(30,50,90,.04)}
+.term .h{font-size:17px;font-weight:800;color:var(--py-blue);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.term .def{font-size:15.5px;color:var(--ink)}
+.term .anal{margin-top:12px;background:var(--purple-bg);border-radius:9px;padding:12px 15px;font-size:14.5px;color:#4a3a7a}
+.term .anal b{color:var(--purple)}
+.box{border-radius:12px;padding:16px 20px;margin:18px 0;font-size:15px}
+.box .t{font-weight:800;margin-bottom:5px;display:flex;align-items:center;gap:7px}
+.tip{background:var(--green-bg);border:1px solid #bfe8d4;color:#1f5e42}.tip .t{color:var(--green)}
+.warn{background:var(--amber-bg);border:1px solid #f3ddad;color:#7a5310}.warn .t{color:var(--amber)}
+pre{border-radius:12px;margin:16px 0;overflow:auto;font-size:14px;box-shadow:0 4px 14px rgba(20,30,60,.15)}
+pre code.hljs{padding:18px 20px;line-height:1.65;font-family:'D2Coding','Consolas','Monaco',monospace}
+.codelabel{display:inline-block;background:#2b2f38;color:#9fb4cc;font-size:12px;font-weight:700;padding:5px 14px;border-radius:9px 9px 0 0;margin-bottom:-16px;position:relative;z-index:1;font-family:monospace}
+.output{background:#0f1620;color:#6fe08a;border-radius:0 0 12px 12px;padding:12px 20px;margin-top:-16px;font-family:'D2Coding','Consolas',monospace;font-size:13.5px;white-space:pre-wrap;border-top:1px solid #26303f}
+.output:before{content:"▶ 실행결과";display:block;color:#5a7186;font-size:11.5px;margin-bottom:6px;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(30,50,90,.05)}
+th{background:var(--py-blue);color:#fff;padding:11px 14px;text-align:left;font-weight:700}
+td{padding:10px 14px;border-top:1px solid var(--line);color:var(--ink-soft)}
+td code,p code,li code,.def code,.anal code,.ans code{background:#eef1f7;color:#b8336a;padding:2px 7px;border-radius:6px;font-family:'D2Coding',Consolas,monospace;font-size:.9em;font-weight:600}
+tr:nth-child(even) td{background:#fafbfe}
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 24px 24px;margin-top:22px}
+.quiz>.qh{font-size:20px;color:var(--accent);font-weight:800;margin:18px 0 4px;display:flex;align-items:center;gap:9px}
+.q{border-top:1px solid var(--line);padding:18px 0 4px}.q:first-of-type{border-top:none}
+.q .qq{font-weight:700;color:var(--ink);font-size:15.5px;margin-bottom:10px}
+.q .qq .num{display:inline-flex;width:26px;height:26px;background:var(--py-yellow);color:#3a3300;border-radius:50%;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-right:8px}
+details{background:#f3f7fc;border:1px solid #d8e6f2;border-radius:10px;margin-top:8px}
+summary{cursor:pointer;padding:11px 16px;font-weight:700;color:var(--accent);font-size:14.5px;user-select:none;list-style:none}
+summary:before{content:"💡 정답·해설 보기"}details[open] summary:before{content:"🔽 정답·해설 접기"}
+summary::-webkit-details-marker{display:none}
+.ans{padding:4px 18px 16px}.ans .lab{font-weight:800;color:var(--green);margin:10px 0 4px;font-size:14px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px}
+.pager a{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;text-decoration:none;color:var(--ink);transition:.15s;box-shadow:0 2px 8px rgba(30,50,90,.04)}
+.pager a:hover{border-color:var(--py-blue);transform:translateY(-2px)}
+.pager .dir{font-size:12px;color:var(--ink-soft);font-weight:700}.pager .ttl{font-weight:700;color:var(--accent);margin-top:3px;font-size:14.5px}
+.pager a.next{text-align:right}.pager a.disabled{opacity:.4;pointer-events:none}
+@media(max-width:600px){.hero h1{font-size:24px}.wrap{padding:0 14px 60px}.hero{padding:28px 22px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="ch01_파이썬개요.html">← 이전</a>
+  <span class="crumb">2장 · 자료형과 연산자</span>
+  <a href="ch03_데이터구조.html">다음 →</a>
+</div>
+<div class="wrap">
+
+<div class="hero">
+  <span class="tag">CHAPTER 02</span>
+  <h1>자료형과 연산자</h1>
+  <p>값을 담는 '변수', 값의 종류인 '자료형', 그리고 값을 계산하는 '연산자'를 배웁니다. 프로그래밍의 가장 기본이 되는 재료들이에요.</p>
+</div>
+
+<div class="goals">
+  <h2>🎯 이 장을 끝내면 이런 걸 할 수 있어요</h2>
+  <ul>
+    <li>변수를 만들고 값을 저장할 수 있다</li>
+    <li>정수·실수·문자열·논리형을 구분하고 변환할 수 있다</li>
+    <li><code>input()</code>으로 입력받고 <code>print()</code>로 출력할 수 있다</li>
+    <li>문자열을 자르고(슬라이싱) 이어 붙일 수 있다</li>
+    <li><code>format()</code>으로 값을 원하는 형식으로 꾸밀 수 있다</li>
+    <li>산술·비교·논리 연산자로 계산할 수 있다</li>
+  </ul>
+</div>
+
+<section>
+  <h2 class="sec"><span class="n">1</span>변수 — 값을 담는 상자</h2>
+
+  <div class="term">
+    <div class="h">📦 변수(Variable)</div>
+    <div class="def">값을 저장해 두고 <b>이름을 붙여 두는 상자</b>예요. 프로그램이 도는 동안 값이 바뀔 수 있어서 '변수(변하는 수)'라고 부릅니다.</div>
+    <div class="anal">🏷️ <b>비유</b> — 택배 상자에 '노트북'이라고 이름표를 붙여 두는 것과 같아요. 나중에 "노트북 상자 가져와"라고 이름만 부르면 됩니다.</div>
+  </div>
+
+  <p>파이썬에서 변수를 만드는 건 아주 간단해요. <strong>이름 = 값</strong> 형태로 쓰면 됩니다.</p>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">r = 5              # r이라는 상자에 5를 넣음
+area = r * r * 3.14   # 반지름이 5인 원의 넓이
+print(area)</code></pre>
+  <div class="output">78.5</div>
+
+  <div class="box tip"><div class="t">💡 '=' 는 같다는 뜻이 아니에요</div>수학에서 <code>=</code>는 '같다'지만, 프로그래밍에서 <code>=</code>는 <strong>"오른쪽 값을 왼쪽 상자에 넣어라"</strong>라는 뜻(할당)이에요. 이걸 <strong>할당(대입) 연산자</strong>라고 부릅니다. 파이썬은 상자를 만들 때 자료형을 미리 정하지 않아요(선언 과정이 없음).</div>
+
+  <h3>변수 이름 짓는 규칙</h3>
+  <table>
+    <tr><th>규칙</th><th>바른 예 ✅</th><th>틀린 예 ❌</th></tr>
+    <tr><td>숫자로 시작 못 함</td><td><code>year2000</code></td><td><code>2000year</code></td></tr>
+    <tr><td>대소문자 구분함</td><td><code>Class</code>, <code>class</code>는 서로 다름</td><td>—</td></tr>
+    <tr><td>특수문자·공백 불가 (밑줄 <code>_</code>만 허용)</td><td><code>member_name</code></td><td><code>member.name</code>, <code>member name</code></td></tr>
+    <tr><td>예약어 사용 금지</td><td>—</td><td><code>for</code>, <code>class</code>, <code>def</code></td></tr>
+  </table>
+  <div class="box warn"><div class="t">⚠️ 예약어(keyword)란?</div>파이썬이 <strong>특별한 용도로 미리 찜해 둔 단어</strong>예요. <code>if</code>, <code>for</code>, <code>def</code>, <code>class</code> 같은 것들이라 변수 이름으로 쓸 수 없어요. 또 <code>print</code>, <code>list</code> 같은 내장 함수 이름도 변수로 쓰지 않는 게 좋습니다(기능이 망가져요).</div>
+
+  <h3>변수 관련 유용한 기능</h3>
+  <ul class="plain">
+    <li><code>id(변수)</code> — 변수가 저장된 <strong>메모리 주소</strong>(고유 번호)를 알려줘요.</li>
+    <li><code>del 변수</code> — 변수를 <strong>삭제</strong>해요. 여러 개는 콤마로: <code>del a, b, c</code></li>
+    <li><strong>다중 할당</strong> — 한 줄에 여러 변수를 한꺼번에: <code>a, b = 1, 2</code></li>
+    <li><code>help(함수)</code> — 함수 사용법(도움말)을 보여줘요.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 class="sec"><span class="n">2</span>화면 입출력</h2>
+
+  <div class="term">
+    <div class="h">⌨️ input() — 입력받기</div>
+    <div class="def">사용자가 키보드로 값을 <b>입력</b>하게 해요. 중요한 점: 입력한 값은 <b>항상 문자열(글자)</b>로 들어옵니다.</div>
+  </div>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">name = input("이름을 입력하세요: ")
+print(name + "님 환영합니다!")</code></pre>
+  <div class="output">이름을 입력하세요: 홍길동
+홍길동님 환영합니다!</div>
+
+  <div class="box warn"><div class="t">⚠️ 숫자를 입력받을 땐 변환이 필요해요</div><code>input()</code>은 숫자를 입력해도 글자 <code>"10"</code>으로 받아요. 계산하려면 <code>int()</code>로 숫자로 바꿔야 합니다: <code>age = int(input("나이: "))</code></div>
+
+  <div class="term">
+    <div class="h">🖨️ print() — 출력하기</div>
+    <div class="def">괄호 안의 값을 화면에 <b>출력</b>해요. 여러 값을 콤마로 나열하면 띄어쓰기와 함께 이어서 보여줍니다.</div>
+  </div>
+  <p><code>print()</code>에는 두 가지 유용한 옵션이 있어요.</p>
+  <ul class="plain">
+    <li><code>sep</code> — 값들 사이를 <strong>무엇으로 구분</strong>할지 (기본값: 공백 한 칸)</li>
+    <li><code>end</code> — 출력 <strong>끝에 무엇을 붙일지</strong> (기본값: 줄바꿈 <code>\n</code>)</li>
+  </ul>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">print("2024", "01", "15", sep="-")   # sep로 구분
+print("끝에 줄바꿈 대신", end=" → ")
+print("이어서 출력")</code></pre>
+  <div class="output">2024-01-15
+끝에 줄바꿈 대신 → 이어서 출력</div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="n">3</span>기본 자료형</h2>
+
+  <div class="term">
+    <div class="h">🎭 자료형(Data Type)</div>
+    <div class="def">값의 <b>종류</b>를 뜻해요. 숫자인지, 글자인지, 참/거짓인지에 따라 할 수 있는 일이 달라집니다.</div>
+    <div class="anal">🧊 <b>비유</b> — 물의 상태(얼음·물·수증기)와 비슷해요. 같은 물이라도 상태에 따라 다루는 방법이 다르듯, 값도 자료형에 따라 쓰는 법이 달라집니다.</div>
+  </div>
+
+  <table>
+    <tr><th>자료형</th><th>이름</th><th>예시</th></tr>
+    <tr><td>정수</td><td><code>int</code></td><td><code>10</code>, <code>-3</code>, <code>0</code></td></tr>
+    <tr><td>실수(소수점)</td><td><code>float</code></td><td><code>3.14</code>, <code>-0.5</code></td></tr>
+    <tr><td>복소수</td><td><code>complex</code></td><td><code>3 + 2j</code> (허수는 <code>j</code>로!)</td></tr>
+    <tr><td>문자열</td><td><code>str</code></td><td><code>"안녕"</code>, <code>'Python'</code></td></tr>
+    <tr><td>논리(참/거짓)</td><td><code>bool</code></td><td><code>True</code>, <code>False</code></td></tr>
+  </table>
+  <div class="box tip"><div class="t">💡 파이썬의 특별한 점</div>다른 언어와 달리 파이썬은 <strong>정수 크기에 제한이 없어요</strong>. 아무리 큰 숫자도 <code>int</code>로 처리합니다. 또 <strong>정수 ÷ 정수는 실수(float)</strong>가 돼요: <code>8 / 2</code> → <code>4.0</code></div>
+
+  <h3>3-1. 문자열 다루기 핵심</h3>
+  <p>문자열은 <strong>따옴표로 감싼 글자</strong>예요. 홑따옴표 <code>' '</code>, 겹따옴표 <code>" "</code> 둘 다 됩니다.</p>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">s = "Python"
+# 여러 줄 문자열은 따옴표 3개
+long = """첫째 줄
+둘째 줄"""
+
+# 문자열 연결(+)과 반복(*)
+print("Ha" + "Ha")   # 연결
+print("Na" * 3)       # 반복</code></pre>
+  <div class="output">HaHa
+NaNaNa</div>
+
+  <div class="term">
+    <div class="h">🔢 인덱싱(Indexing) — 한 글자 뽑기</div>
+    <div class="def">문자열의 각 글자에는 <b>번호(인덱스)</b>가 있어요. <b>첫 글자가 0번</b>부터 시작하고, 음수는 뒤에서부터 셉니다.</div>
+  </div>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python"># 인덱스:  P(0) y(1) t(2) h(3) o(4) n(5)
+#         P(-6) y(-5) t(-4) h(-3) o(-2) n(-1)
+s = "Python"
+print(s[0])    # 첫 글자
+print(s[-1])   # 마지막 글자</code></pre>
+  <div class="output">P
+n</div>
+
+  <div class="term">
+    <div class="h">✂️ 슬라이싱(Slicing) — 여러 글자 잘라내기</div>
+    <div class="def"><code>[시작:끝]</code>으로 일부분을 잘라내요. <b>시작은 포함, 끝은 불포함</b>이 핵심! <code>[시작:끝:간격]</code>으로 몇 칸씩 건너뛸 수도 있어요.</div>
+    <div class="anal">🎬 <b>비유</b> — 영화 편집처럼 "3초부터 8초까지 잘라줘"인데, <b>8초 직전까지만</b> 잘리는 규칙이라고 생각하세요.</div>
+  </div>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">s = "Python"
+print(s[0:3])    # 0,1,2번 → 3번 직전까지
+print(s[2:])     # 2번부터 끝까지
+print(s[::-1])   # 간격 -1 → 거꾸로!</code></pre>
+  <div class="output">Pyt
+thon
+nohtyP</div>
+  <div class="box tip"><div class="t">💡 <code>[::-1]</code> 은 뒤집기 마법</div>간격을 <code>-1</code>로 주면 문자열이 통째로 <strong>거꾸로</strong> 뒤집혀요. 리스트에서도 똑같이 작동합니다(다음 장에서!).</div>
+
+  <div class="term">
+    <div class="h">🚪 이스케이프 문자(escape)</div>
+    <div class="def">역슬래시 <code>\</code> 뒤에 특정 글자를 붙여 <b>특수 기능</b>을 나타내요.</div>
+  </div>
+  <table>
+    <tr><th>기호</th><th>의미</th><th>기호</th><th>의미</th></tr>
+    <tr><td><code>\n</code></td><td>줄 바꿈</td><td><code>\\</code></td><td>역슬래시 표시</td></tr>
+    <tr><td><code>\t</code></td><td>탭(간격)</td><td><code>\'</code></td><td>홑따옴표 표시</td></tr>
+    <tr><td><code>\r</code></td><td>맨 앞으로 복귀</td><td><code>\"</code></td><td>겹따옴표 표시</td></tr>
+  </table>
+  <p>경로나 정규식처럼 <code>\</code>를 그대로 쓰고 싶으면 문자열 앞에 <code>r</code>을 붙여요(raw 문자열): <code>r"C:\새폴더"</code></p>
+
+  <h3>3-2. 논리형 (True / False)</h3>
+  <div class="term">
+    <div class="h">✔️ 논리형(bool)</div>
+    <div class="def">참(<code>True</code>) 또는 거짓(<code>False</code>) <b>딱 두 값</b>만 가져요. 반드시 첫 글자가 대문자예요(<code>true</code>는 안 됨).</div>
+  </div>
+  <p>어떤 값들은 자동으로 <strong>거짓(False)</strong>으로 판단돼요. 이걸 알면 조건문에서 유용해요.</p>
+  <div class="box warn"><div class="t">⚠️ False로 취급되는 값들</div><code>None</code> · <code>False</code> · 숫자 <code>0</code> (<code>0.0</code>, <code>0j</code>) · 빈 문자열 <code>""</code> · 빈 리스트 <code>[]</code> · 빈 튜플 <code>()</code> · 빈 딕셔너리 <code>{}</code> — 이것들 외에는 모두 <strong>True</strong>예요. (참고: 공백 한 칸 <code>" "</code>은 비어있지 않으므로 True!)</div>
+
+  <h3>3-3. 자료형 확인과 변환</h3>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">print(type(10))      # 자료형 확인
+print(int("100") + 5)  # 문자열 → 정수
+print(str(3.14))     # 실수 → 문자열
+print(float("2.5"))  # 문자열 → 실수
+print(isinstance(10, int))  # 10이 int인가?</code></pre>
+  <div class="output">&lt;class 'int'&gt;
+105
+3.14
+2.5
+True</div>
+  <ul class="plain">
+    <li><code>type(값)</code> — 자료형이 뭔지 알려줌</li>
+    <li><code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code> — 자료형 변환</li>
+    <li><code>isinstance(값, 타입)</code> — 값이 그 타입인지 True/False로 확인</li>
+  </ul>
+</section>
+
+<section>
+  <h2 class="sec"><span class="n">4</span>포맷팅 — 값을 예쁘게 꾸미기</h2>
+  <div class="term">
+    <div class="h">🎨 포맷팅(Formatting)</div>
+    <div class="def">문자·숫자·날짜에 <b>형식을 지정</b>하는 것. 소수점 자릿수, 정렬, 자리 채우기 등을 깔끔하게 표현해요.</div>
+  </div>
+  <p>가장 많이 쓰는 방법은 <code>.format()</code>과 <strong>f-문자열</strong>이에요.</p>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">name, age = "홍길동", 23
+# format() 방식 — {}가 자리표시자
+print("{}님의 나이는 {}살입니다".format(name, age))
+# f-문자열 방식 — 요즘 가장 많이 씀
+print(f"{name}님의 나이는 {age}살입니다")</code></pre>
+  <div class="output">홍길동님의 나이는 23살입니다
+홍길동님의 나이는 23살입니다</div>
+
+  <h3>숫자·정렬·소수점 형식</h3>
+  <table>
+    <tr><th>형식</th><th>의미</th><th>예시 → 결과</th></tr>
+    <tr><td><code>:d</code></td><td>10진 정수</td><td><code>{:d}</code></td></tr>
+    <tr><td><code>:f</code></td><td>실수</td><td><code>{:.2f}</code> → 소수 2자리</td></tr>
+    <tr><td><code>:b :o :x</code></td><td>2진/8진/16진수</td><td>—</td></tr>
+    <tr><td><code>:&lt;</code> <code>:^</code> <code>:&gt;</code></td><td>왼쪽/가운데/오른쪽 정렬</td><td><code>{:^10}</code></td></tr>
+    <tr><td><code>:05d</code></td><td>0으로 자리 채우기</td><td><code>42</code> → <code>00042</code></td></tr>
+  </table>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">print(f"{3.14159:.2f}")    # 소수점 2자리
+print(f"{42:05d}")          # 5칸을 0으로 채움
+print(f"{255:x}")           # 16진수
+print(f"[{'중앙':^8}]")      # 8칸 가운데 정렬</code></pre>
+  <div class="output">3.14
+00042
+ff
+[   중앙   ]</div>
+
+  <h3>날짜 형식</h3>
+  <p>날짜 기호도 알아두면 좋아요: <code>%Y</code>(연) <code>%m</code>(월) <code>%d</code>(일) <code>%H</code>(시) <code>%M</code>(분) <code>%S</code>(초)</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="n">5</span>연산자</h2>
+  <div class="term">
+    <div class="h">➕ 연산자(Operator)</div>
+    <div class="def">값을 가지고 <b>계산이나 비교를 수행</b>하는 기호예요. 사칙연산부터 참/거짓 판단까지 다양합니다.</div>
+  </div>
+
+  <h3>5-1. 산술 연산자</h3>
+  <table>
+    <tr><th>연산자</th><th>의미</th><th>예시 → 결과</th></tr>
+    <tr><td><code>+ - * /</code></td><td>더하기·빼기·곱하기·나누기</td><td><code>7 / 2</code> → <code>3.5</code></td></tr>
+    <tr><td><code>//</code></td><td>몫 (버림 나눗셈)</td><td><code>7 // 2</code> → <code>3</code></td></tr>
+    <tr><td><code>%</code></td><td>나머지</td><td><code>7 % 2</code> → <code>1</code></td></tr>
+    <tr><td><code>**</code></td><td>제곱</td><td><code>2 ** 3</code> → <code>8</code></td></tr>
+  </table>
+  <div class="box tip"><div class="t">💡 <code>%</code>(나머지)의 쓸모</div>어떤 수가 <strong>짝수인지</strong> 알고 싶으면 <code>n % 2 == 0</code>인지 보면 돼요. <strong>배수 판별</strong>에도 자주 씁니다.</div>
+
+  <h3>5-2. 대입(할당) 연산자</h3>
+  <p>계산과 저장을 한 번에 하는 <strong>복합 대입 연산자</strong>가 편리해요.</p>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">x = 10
+x += 5    # x = x + 5 와 같음 → 15
+x *= 2    # x = x * 2 와 같음 → 30
+print(x)</code></pre>
+  <div class="output">30</div>
+  <p>이런 식으로 <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>//=</code>, <code>%=</code>, <code>**=</code> 등이 있어요.</p>
+
+  <h3>5-3. 비교 연산자</h3>
+  <p>크기를 비교해 <strong>True/False</strong>로 답해요: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>(같다), <code>!=</code>(다르다)</p>
+  <div class="box warn"><div class="t">⚠️ <code>=</code> 와 <code>==</code> 를 헷갈리지 마세요</div><code>=</code>는 <strong>값을 넣는 것(할당)</strong>, <code>==</code>는 <strong>같은지 비교</strong>하는 것이에요. 초보자가 가장 많이 하는 실수랍니다!</div>
+
+  <h3>5-4. 논리 연산자</h3>
+  <table>
+    <tr><th>연산자</th><th>의미</th><th>결과가 True일 때</th></tr>
+    <tr><td><code>and</code></td><td>그리고</td><td>양쪽 <strong>모두</strong> 참</td></tr>
+    <tr><td><code>or</code></td><td>또는</td><td><strong>하나라도</strong> 참</td></tr>
+    <tr><td><code>not</code></td><td>부정(반대)</td><td>참↔거짓 뒤집기</td></tr>
+  </table>
+  <div class="box warn"><div class="t">⚠️ 파이썬은 <code>!</code>를 안 써요</div>C나 자바에서 쓰는 <code>!</code>(부정) 대신, 파이썬은 영어 단어 <code>not</code>을 씁니다. '그리고/또는'도 <code>&amp;&amp;</code>, <code>||</code>가 아니라 <code>and</code>, <code>or</code>예요.</div>
+
+  <h3>5-5. 비트 연산자 (참고)</h3>
+  <p>숫자를 2진수로 바꿔 비트 단위로 계산해요. <code>&amp;</code>(AND) <code>|</code>(OR) <code>^</code>(XOR) <code>~</code>(NOT) <code>&gt;&gt;</code> <code>&lt;&lt;</code>(시프트). 처음엔 몰라도 괜찮아요.</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="n">6</span>문자열 메서드 모음</h2>
+  <p>문자열에는 편리한 '기능(메서드)'이 많아요. 자주 쓰는 것만 추렸습니다.</p>
+  <table>
+    <tr><th>메서드</th><th>기능</th></tr>
+    <tr><td><code>len(s)</code></td><td>길이(글자 수)</td></tr>
+    <tr><td><code>s.split('구분자')</code></td><td>구분자로 잘라 <strong>리스트</strong>로</td></tr>
+    <tr><td><code>'구분자'.join(리스트)</code></td><td>리스트를 이어 <strong>문자열</strong>로</td></tr>
+    <tr><td><code>s.upper()</code> / <code>s.lower()</code></td><td>모두 대문자 / 소문자로</td></tr>
+    <tr><td><code>s.replace(옛것, 새것)</code></td><td>바꿔치기</td></tr>
+    <tr><td><code>s.find('글자')</code></td><td>글자 위치(인덱스) 찾기</td></tr>
+    <tr><td><code>s.startswith()</code> / <code>endswith()</code></td><td>~로 시작/끝나는지 확인</td></tr>
+  </table>
+  <div class="codelabel">python</div>
+  <pre><code class="language-python">s = "apple,banana,cherry"
+fruits = s.split(",")     # 콤마로 자르기
+print(fruits)
+print("-".join(fruits))   # 하이픈으로 잇기</code></pre>
+  <div class="output">['apple', 'banana', 'cherry']
+apple-banana-cherry</div>
+</section>
+
+<section>
+  <div class="quiz">
+    <div class="qh">📝 연습문제</div>
+    <p style="color:var(--ink-soft);font-size:14px;margin:2px 0 8px">교재 원본 문제를 쉬운 해설과 함께 담았어요. 스스로 풀고 확인해 보세요.</p>
+
+    <div class="q">
+      <div class="qq"><span class="num">1</span>이름과 나이 변수를 <code>홍길동님의 나이는 23살입니다</code> 형식으로 출력하세요. (format 이용)</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">name = "홍길동"
+age = 23
+print("{}님의 나이는 {}살입니다".format(name, age))</code></pre>
+        <div class="output">홍길동님의 나이는 23살입니다</div>
+        <div class="lab">해설</div>
+        <p><code>{}</code>는 값이 들어갈 '빈 자리'예요. <code>format()</code>의 인수가 순서대로 첫 번째 <code>{}</code>, 두 번째 <code>{}</code>에 들어갑니다. f-문자열로는 <code>f"{name}님의 나이는 {age}살입니다"</code>로도 됩니다.</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">2</span>두 정수를 입력받아 덧셈·뺄셈·곱셈·나눗셈·몫·나머지를 출력하세요.</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">a = int(input("첫 번째 수: "))
+b = int(input("두 번째 수: "))
+print("덧셈:", a + b)
+print("뺄셈:", a - b)
+print("곱셈:", a * b)
+print("나눗셈:", a / b)
+print("몫:", a // b)
+print("나머지:", a % b)</code></pre>
+        <div class="lab">해설</div>
+        <p>핵심은 <code>int(input())</code>로 <strong>문자열을 정수로 바꾸는 것</strong>이에요. 이걸 빼먹으면 <code>"3" + "5"</code>가 <code>"35"</code>(글자 이어붙이기)가 되어버립니다.</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">3</span><code>"Hello World"</code>를 이용해 <code>World Hello</code>로 출력하세요. (분리·합치기 이용)</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">s = "Hello World"
+words = s.split()          # ['Hello', 'World']
+print(words[1] + " " + words[0])</code></pre>
+        <div class="output">World Hello</div>
+        <div class="lab">해설</div>
+        <p><code>split()</code>은 공백 기준으로 잘라 리스트를 만들어요. <code>[0]</code>은 Hello, <code>[1]</code>은 World이므로 순서를 바꿔 이어 붙이면 됩니다. <code>" ".join(words[::-1])</code>로도 가능해요.</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">4</span><code>x = 'abcdef'</code>를 이용해 <code>bcdefa</code>로 출력하세요. (슬라이싱 이용)</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">x = 'abcdef'
+print(x[1:] + x[0])</code></pre>
+        <div class="output">bcdefa</div>
+        <div class="lab">해설</div>
+        <p><code>x[1:]</code>은 1번(b)부터 끝까지 → <code>bcdef</code>. 여기에 맨 앞 글자 <code>x[0]</code>(a)을 뒤에 붙이면 <code>bcdefa</code>가 됩니다. (첫 글자를 맨 뒤로 보내는 회전)</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">5</span><code>x = 'abcdef'</code>를 이용해 <code>FEDCBA</code>로 출력하세요.</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">x = 'abcdef'
+print(x[::-1].upper())</code></pre>
+        <div class="output">FEDCBA</div>
+        <div class="lab">해설</div>
+        <p>두 가지를 조합해요. ① <code>[::-1]</code>로 거꾸로 뒤집어 <code>fedcba</code>를 만들고, ② <code>.upper()</code>로 모두 대문자로 바꿉니다.</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">6</span>섭씨온도를 입력받아 화씨로 변환하세요. 단, 소수점 이하가 있을 때만 둘째 자리까지 출력하고, 없으면 소수점을 표시하지 않습니다. (<code>F = C×1.8 + 32</code>)</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">C = float(input("섭씨온도: "))
+F = C * 1.8 + 32
+print(f"{F:g}")    # :g 는 불필요한 0을 자동 정리</code></pre>
+        <div class="output">섭씨 25 입력 → 77
+섭씨 23.6 입력 → 74.48</div>
+        <div class="lab">해설</div>
+        <p><code>:g</code> 형식은 <strong>필요할 때만 소수점을 보여주는</strong> 똑똑한 형식이에요. <code>77.0</code>은 <code>77</code>로, <code>74.48</code>은 그대로 보여줍니다. 정확히 둘째 자리까지 제어하려면 조건문으로 나눠 <code>:.2f</code>와 <code>:.0f</code>를 골라 쓰는 방법도 있어요.</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">7</span>다음 중 변수 이름으로 <strong>잘못된 것</strong>을 모두 고르세요. ① <code>for</code> ② <code>10th</code> ③ <code>Student.name</code> ④ <code>_1234</code></div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <p><strong>①, ②, ③</strong> (④는 올바름)</p>
+        <div class="lab">해설</div>
+        <p>① <code>for</code>는 예약어라 불가 ② <code>10th</code>는 숫자로 시작해서 불가 ③ <code>Student.name</code>은 점(<code>.</code>)이 들어가서 불가. ④ <code>_1234</code>는 밑줄로 시작 → <strong>가능</strong>합니다(밑줄은 허용되는 유일한 특수문자).</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">8</span>다음 중 파이썬 3에서 <strong>결과가 잘못</strong> 짝지어진 것은? ① <code>8//2</code> → 4 ② <code>8/2</code> → 4 ③ <code>8**2</code> → 64</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <p><strong>②</strong> — <code>8/2</code>의 결과는 <code>4</code>가 아니라 <code>4.0</code></p>
+        <div class="lab">해설</div>
+        <p>파이썬 3에서 <code>/</code>(나눗셈)는 <strong>항상 실수(float)</strong>를 만들어요. 그래서 <code>8/2</code>는 <code>4.0</code>입니다. 정수 몫이 필요하면 <code>//</code>를 써야 해요. (<code>8//2</code> → <code>4</code>, <code>8**2</code> → <code>64</code>는 맞음)</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">9</span><code>split()</code>을 이용해 <code>str_ = "대한민국-미국-일본"</code>에서 <code>일본</code>만 출력하세요.</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">str_ = "대한민국-미국-일본"
+print(str_.split("-")[2])</code></pre>
+        <div class="output">일본</div>
+        <div class="lab">해설</div>
+        <p><code>split("-")</code>로 자르면 <code>['대한민국', '미국', '일본']</code>이 돼요. 세 번째 항목이므로 인덱스 <code>[2]</code>로 꺼냅니다. (맨 뒤라서 <code>[-1]</code>로도 가능)</p>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <div class="qq"><span class="num">10</span>정수를 입력받아 <strong>짝수/홀수</strong>를 판별하는 코드를 작성하세요. (다음 장 미리보기)</div>
+      <details><summary></summary><div class="ans">
+        <div class="lab">정답</div>
+        <div class="codelabel">python</div>
+        <pre><code class="language-python">n = int(input("정수: "))
+if n % 2 == 0:
+    print("짝수")
+else:
+    print("홀수")</code></pre>
+        <div class="lab">해설</div>
+        <p>2로 나눈 <strong>나머지</strong>(<code>% 2</code>)가 0이면 짝수, 아니면 홀수예요. 조건문 <code>if</code>는 4장에서 자세히 배웁니다. 나머지 연산이 이렇게 유용하게 쓰인답니다!</p>
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<div class="pager">
+  <a class="prev" href="ch01_파이썬개요.html"><div class="dir">← 이전</div><div class="ttl">1장. 파이썬 개요</div></a>
+  <a class="next" href="ch03_데이터구조.html"><div class="dir">다음 →</div><div class="ttl">3장. 데이터 구조</div></a>
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
