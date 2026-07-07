@@ -1,2 +1,4 @@
-hellowworkld
+test.txt
+hellow
+world
 더출력하고싶어

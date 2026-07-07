@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쉬운 파이썬 · 1부 프로그래밍 언어 기본</title>
+<style>
+:root{--py-blue:#3776AB;--py-yellow:#FFD43B;--ink:#1a2233;--ink-soft:#4a5568;--line:#e6e9f0;--bg:#f6f8fc;--card:#fff;--accent:#2f6fb0;--green:#2e9e6b;--purple:#6b4fbb}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 80px}
+.hero{background:linear-gradient(135deg,#3776AB 0%,#2b5e8c 100%);color:#fff;border-radius:0 0 28px 28px;padding:56px 40px 46px;margin-bottom:36px;box-shadow:0 12px 34px rgba(55,118,171,.28);text-align:center}
+.hero .snake{font-size:44px;margin-bottom:10px}
+.hero .tag{display:inline-block;background:var(--py-yellow);color:#3a3300;font-weight:700;font-size:13px;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-size:34px;line-height:1.25;margin-bottom:12px;letter-spacing:-.6px}
+.hero p{opacity:1;font-size:16px;max-width:560px;margin:0 auto;color:#eef5ff}
+.hero p strong{color:#FFE9A8;font-weight:800}
+.intro{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-bottom:16px}
+.intro h2{font-size:17px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.intro p{color:var(--ink-soft);font-size:15px;margin:8px 0}
+.intro .feat{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.intro .feat span{background:#eef4fb;color:var(--accent);font-size:13.5px;font-weight:600;padding:7px 14px;border-radius:20px}
+.howto{background:#fffdf5;border:1px solid #f3e6b3;border-radius:14px;padding:18px 24px;margin-bottom:34px;font-size:14.5px;color:#6b5a15}
+.howto b{color:#8a6d0a}
+.sectitle{font-size:15px;font-weight:800;color:var(--ink-soft);letter-spacing:.5px;margin:8px 4px 16px;text-transform:uppercase}
+.cards{display:grid;gap:16px}
+.chapter{display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 26px;
+  text-decoration:none;color:var(--ink);transition:.18s;box-shadow:0 3px 12px rgba(30,50,90,.05);position:relative;overflow:hidden}
+.chapter:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--py-blue);opacity:.85}
+.chapter:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(55,118,171,.18);border-color:var(--py-blue)}
+.chapter .num{flex:none;width:56px;height:56px;border-radius:15px;background:linear-gradient(135deg,#3776AB,#2b5e8c);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;box-shadow:0 4px 12px rgba(55,118,171,.3)}
+.chapter .body{flex:1}
+.chapter .body h3{font-size:18.5px;margin-bottom:4px;letter-spacing:-.3px}
+.chapter .body p{font-size:14px;color:var(--ink-soft);margin:0}
+.chapter .arrow{flex:none;color:var(--py-blue);font-size:22px;font-weight:700;opacity:.5;transition:.18s}
+.chapter:hover .arrow{opacity:1;transform:translateX(4px)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tags b{background:#f0f3f8;color:var(--ink-soft);font-size:12px;font-weight:600;padding:3px 9px;border-radius:6px}
+.foot{text-align:center;color:var(--ink-soft);font-size:13.5px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+@media(max-width:600px){.hero{padding:44px 24px 36px}.hero h1{font-size:26px}.chapter{padding:18px 18px;gap:14px}.chapter .num{width:48px;height:48px;font-size:19px}.chapter .body h3{font-size:16.5px}.wrap{padding:0 14px 60px}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="snake">🐍</div>
+  <span class="tag">THE PYTHON · 프로그래밍 언어 기본 &amp; 활용</span>
+  <h1>쉽게 다시 만든 파이썬 교재</h1>
+  <p>어려운 용어는 쉬운 비유로, 개념마다 예제와 풀이로. 처음 배우는 사람도 따라올 수 있게 재구성했어요.</p>
+</div>
+<div class="wrap">
+
+  <div class="intro">
+    <h2>📚 이 교재는요</h2>
+    <p>원본 강의 자료(8개 챕터)를 <strong>더 이해하기 쉽게</strong> 다시 정리했어요. 각 용어에 <strong>쉬운 정의와 실생활 비유</strong>를 붙이고, 개념마다 <strong>실행 결과가 있는 예제</strong>와 <strong>정답·해설이 담긴 연습문제</strong>를 넣었습니다.</p>
+    <div class="feat">
+      <span>🔤 쉬운 용어 정의</span>
+      <span>🍳 실생활 비유</span>
+      <span>💻 실행 예제</span>
+      <span>📝 정답·해설 연습문제</span>
+    </div>
+  </div>
+
+  <div class="intro" style="border-left:5px solid #3776AB">
+    <h2>🍜 하나의 이야기로 배웁니다 — <strong style="color:#3776AB">파이 분식</strong> 창업기</h2>
+    <p>문법을 따로따로 외우면 <strong>"이걸 언제 써먹지?"</strong> 하는 물음이 남아요. 그래서 이 교재는 <strong>작은 분식집 '파이 분식'을 파이썬으로 하나씩 자동화해 가는 이야기</strong>로 8개 챕터를 이어 붙였습니다.</p>
+    <p style="font-size:14px">가게 문을 열기로 결심하고(1장) → 메뉴 가격을 계산기에 담고(2장) → 메뉴판 전체를 관리하고(3장) → "재고 있으면 팔고 없으면 품절"을 판단하고(4장) → 반복되는 계산을 묶고(5장) → 계산 도구를 파일로 나눠 정리하고(6장) → 메뉴 하나하나를 '객체'로 만들고(7장) → 손님이 이상한 주문을 해도 가게가 멈추지 않게(8장) 만듭니다.</p>
+    <p style="font-size:14px;color:#3776AB;font-weight:600">👉 매 장을 지날수록 '파이 분식'이 점점 똑똑해져요. 문법 하나하나가 <b>왜 필요한지</b> 자연스럽게 몸에 뱁니다.</p>
+  </div>
+
+  <div class="howto">
+    💡 <b>이렇게 공부하세요</b> — 챕터를 <b>순서대로</b> 읽으며 예제를 직접 따라 쳐 보세요. '파이 분식' 이야기가 장마다 이어지니, <b>1장부터 차례로</b> 보는 걸 권해요. 연습문제는 먼저 스스로 푼 뒤 <b>'정답·해설 보기'</b>를 눌러 확인하면 실력이 쑥쑥 늘어요.
+  </div>
+
+  <div class="sectitle">📖 1부 · 프로그래밍 언어 기본</div>
+  <div class="cards">
+
+    <a class="chapter" href="ch01_파이썬개요.html">
+      <div class="num">01</div>
+      <div class="body">
+        <h3>파이썬 개요 및 개발환경 구성</h3>
+        <p>파이썬이 어떤 언어인지, 설치와 실행 환경 갖추기</p>
+        <div class="tags"><b>인터프리터 언어</b><b>아나콘다</b><b>주피터 노트북</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch02_자료형과연산자.html">
+      <div class="num">02</div>
+      <div class="body">
+        <h3>자료형과 연산자</h3>
+        <p>변수, 정수·실수·문자열, 포맷팅, 사칙·비교·논리 연산</p>
+        <div class="tags"><b>변수</b><b>자료형</b><b>슬라이싱</b><b>연산자</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch03_데이터구조.html">
+      <div class="num">03</div>
+      <div class="body">
+        <h3>데이터 구조</h3>
+        <p>리스트·튜플·딕셔너리·셋, 그리고 enumerate</p>
+        <div class="tags"><b>리스트</b><b>튜플</b><b>딕셔너리</b><b>셋</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch04_제어문.html">
+      <div class="num">04</div>
+      <div class="body">
+        <h3>제어문</h3>
+        <p>if 조건문, for·while 반복문, break·continue, 중첩 루프</p>
+        <div class="tags"><b>조건문</b><b>반복문</b><b>range</b><b>중첩 루프</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch05_함수.html">
+      <div class="num">05</div>
+      <div class="body">
+        <h3>함수</h3>
+        <p>def·return, 지역/전역변수, 매개변수, 람다, 내장함수</p>
+        <div class="tags"><b>함수 정의</b><b>매개변수</b><b>*args</b><b>람다</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch06_모듈과패키지.html">
+      <div class="num">06</div>
+      <div class="body">
+        <h3>모듈과 패키지</h3>
+        <p>import 방법, 내 모듈 만들기, 패키지 구조, pip 설치</p>
+        <div class="tags"><b>모듈</b><b>import</b><b>패키지</b><b>pip</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="sectitle" style="margin-top:34px">📖 2부 · 프로그래밍 언어 활용</div>
+  <div class="cards">
+
+    <a class="chapter" href="ch07_객체지향.html">
+      <div class="num">07</div>
+      <div class="body">
+        <h3>객체지향 프로그래밍</h3>
+        <p>클래스·객체, 생성자, self, 상속과 super(), 재정의</p>
+        <div class="tags"><b>클래스</b><b>객체</b><b>상속</b><b>super()</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+    <a class="chapter" href="ch08_예외처리.html">
+      <div class="num">08</div>
+      <div class="body">
+        <h3>예외처리</h3>
+        <p>try~except, raise, 사용자 정의 예외, finally·with</p>
+        <div class="tags"><b>예외</b><b>try-except</b><b>raise</b><b>finally</b></div>
+      </div>
+      <div class="arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="foot">🐍 The Python · 1부 프로그래밍 언어 기본 &nbsp;·&nbsp; 원본 강의 자료를 학습용으로 재구성한 자료입니다</div>
+
+</div>
+</body>
+</html>
