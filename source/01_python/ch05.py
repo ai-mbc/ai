@@ -1,7 +1,8 @@
-#ch05.py
-def my_hello(cnt:int):#파이썬을cnt번출력
+# ch05.py
+def my_hello(cnt:int): # python을 cnt번 출력+__name__까지 출력
     for i in range(cnt):
-        print('hello,python',end='\t')
-        print('hi,python')
+        print('Hello, Python', end='\t')
+        print('Hi, Python')
     print(__name__)
-my_hello(3)
+if __name__=="__main__":
+    my_hello(3)
