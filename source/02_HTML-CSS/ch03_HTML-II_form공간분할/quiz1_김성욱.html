@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="quiz1.css">
+</head>
+<body>
+    <main class="page-wrap">
+        <section class="join-card" aria-labelledby="page-title">
+            <h1 id="page-title">회원가입</h1>
+
+            <form id="joinForm" novalidate>
+                <fieldset class="required-fields">
+                    <legend>필수입력</legend>
+
+                    <div class="form-row">
+                        <label for="userName">이름 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            id="userName"
+                            name="userName"
+                            minlength="2"
+                            maxlength="20"
+                            placeholder="이름은 2글자 이상"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <label for="userId">아이디 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            id="userId"
+                            name="userId"
+                            minlength="4"
+                            maxlength="20"
+                            placeholder="ID는 4글자 이상"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <label for="password">비밀번호 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            minlength="1"
+                            maxlength="30"
+                            placeholder="비밀번호 1글자 이상"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <label for="passwordConfirm">비밀번호 확인 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="password"
+                            id="passwordConfirm"
+                            name="passwordConfirm"
+                            minlength="1"
+                            maxlength="30"
+                            placeholder="비밀번호를 다시 입력"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <label for="phone">전화 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="02-716-1006 / 010-9999-9999"
+                            autocomplete="tel"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">이메일 <span class="required" aria-hidden="true">*</span></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="id@domain.com 또는 한글@domain.co.kr"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                </fieldset>
+
+                <fieldset class="optional-fields">
+                    <legend>추가 입력 사항</legend>
+
+                    <div class="form-row">
+                        <label for="job">직업</label>
+                        <input
+                            type="text"
+                            id="job"
+                            name="job"
+                            maxlength="30"
+                            placeholder="직업을 입력하세요"
+                        >
+                    </div>
+
+                    <div class="form-row option-row">
+                        <span class="row-label">결혼유무</span>
+                        <label class="inline-option">
+                            <input type="radio" name="marriage" value="기혼"> 기혼
+                        </label>
+                        <label class="inline-option">
+                            <input type="radio" name="marriage" value="미혼"> 미혼
+                        </label>
+                    </div>
+
+                    <div class="form-row option-row">
+                        <span class="row-label">자식</span>
+                        <label class="inline-option">
+                            <input type="checkbox" name="children" value="아들"> 아들
+                        </label>
+                        <label class="inline-option">
+                            <input type="checkbox" name="children" value="딸"> 딸
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="region">지역</label>
+                        <select id="region" name="region">
+                            <option value="">선택</option>
+                            <option value="서울">서울</option>
+                            <option value="경기">경기</option>
+                            <option value="인천">인천</option>
+                            <option value="강원">강원</option>
+                            <option value="충청">충청</option>
+                            <option value="전라">전라</option>
+                            <option value="경상">경상</option>
+                            <option value="제주">제주</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <p id="errorMessage" class="error-message" role="alert" aria-live="polite"></p>
+
+                <div class="button-area">
+                    <button type="submit">가입</button>
+                    <button type="reset">취소</button>
+                </div>
+            </form>
+
+            <footer>
+                <p>서울시 서대문구 신촌로 141 은하빌딩 203호</p>
+                <p>Copyright © XX All rights reserved</p>
+            </footer>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById('joinForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function showError(message, element) {
+            errorMessage.textContent = message;
+            if (element) {
+                element.focus();
+            }
+        }
+
+        function clearError() {
+            errorMessage.textContent = '';
+        }
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            clearError();
+
+            const userName = document.getElementById('userName');
+            const userId = document.getElementById('userId');
+            const password = document.getElementById('password');
+            const passwordConfirm = document.getElementById('passwordConfirm');
+            const phone = document.getElementById('phone');
+            const email = document.getElementById('email');
+
+            const namePattern = /^[가-힣A-Za-z]{2,20}$/;
+            const idPattern = /^[A-Za-z0-9가-힣]{4,20}$/;
+            const phonePattern = /^(02-\d{3,4}-\d{4}|01[016789]-\d{3,4}-\d{4})$/;
+            const emailPattern = /^[A-Za-z가-힣][A-Za-z0-9가-힣._-]*@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
+
+            if (!namePattern.test(userName.value.trim())) {
+                showError('이름은 한글 또는 영문 2글자 이상으로 입력하세요.', userName);
+                return;
+            }
+
+            if (!idPattern.test(userId.value.trim())) {
+                showError('아이디는 한글·영문·숫자 조합 4글자 이상으로 입력하세요.', userId);
+                return;
+            }
+
+            if (password.value.length < 1) {
+                showError('비밀번호를 1글자 이상 입력하세요.', password);
+                return;
+            }
+
+            if (password.value !== passwordConfirm.value) {
+                showError('비밀번호와 비밀번호 확인 값이 일치하지 않습니다.', passwordConfirm);
+                return;
+            }
+
+            if (!phonePattern.test(phone.value.trim())) {
+                showError('전화번호를 02-716-1006 또는 010-9999-9999 형식으로 입력하세요.', phone);
+                return;
+            }
+
+            if (!emailPattern.test(email.value.trim())) {
+                showError('이메일은 문자로 시작하는 id@domain.co.kr 형식으로 입력하세요.', email);
+                return;
+            }
+
+            alert(userName.value.trim() + '님, 회원가입 입력이 정상적으로 완료되었습니다.');
+        });
+
+        form.addEventListener('reset', function () {
+            clearError();
+        });
+    </script>
+</body>
+</html>
