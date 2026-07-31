@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 레이아웃 예제</title>
+
+    <style>
+        /* 모든 요소의 크기 계산에 border와 padding을 포함 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: Arial, "맑은 고딕", sans-serif;
+        }
+
+        /* 전체 화면 가운데 배치 */
+        #wrap {
+            width: 90%;
+            max-width: 760px;
+            margin: 25px auto;
+            padding: 8px;
+            border: 1px solid #aaaaaa;
+            background-color: rgba(235, 242, 245, 0.75);
+            /*
+            배경사진을 넣으려면 아래 주석을 해제하세요.
+            background-image: url("sulhyun.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            */
+        }
+
+        header {
+            height: 80px;
+            border: 1px solid #999999;
+            background-color: yellow;
+            text-align: center;
+            line-height: 80px;
+            font-size: 13px;
+        }
+
+        nav {
+            margin-top: 4px;
+            padding: 10px 28px;
+            border: 1px solid #aaaaaa;
+            background-color: rgba(245, 248, 249, 0.8);
+            text-align: center;
+        }
+
+            nav h2 {
+                margin-bottom: 8px;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+            nav ul {
+                overflow: hidden;
+                list-style: none;
+                border-radius: 18px;
+                background-color: pink;
+            }
+
+                nav ul li {
+                    float: left;
+                    width: 20%;
+                    border-right: 1px solid #ffffff;
+                }
+
+                    nav ul li:last-child {
+                        border-right: none;
+                    }
+
+                    nav ul li a {
+                        display: block;
+                        padding: 9px 0;
+                        color: #7b245a;
+                        font-size: 12px;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+
+                        nav ul li a:hover {
+                            background-color: #ff9fba;
+                            color: #ffffff;
+                        }
+
+        main {
+            margin-top: 4px;
+        }
+
+            /* float 사용 후 부모 높이를 유지 */
+            main::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+        section {
+            float: left;
+            width: 78%;
+            height: 245px;
+            padding-top: 10px;
+            border: 1px solid #aaaaaa;
+            background-color: rgba(245, 248, 249, 0.65);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        aside {
+            float: right;
+            width: 21%;
+            height: 245px;
+            padding-top: 10px;
+            border: 1px solid #aaaaaa;
+            background-color: rgba(245, 248, 249, 0.65);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        footer {
+            height: 72px;
+            margin-top: 4px;
+            border: 1px solid #999999;
+            background-color: yellow;
+            text-align: center;
+            line-height: 72px;
+            font-size: 13px;
+        }
+
+        /* 화면이 좁아지면 CONTENT와 BANNER를 세로 배치 */
+        @media (max-width: 600px) {
+            nav {
+                padding: 10px;
+            }
+
+                nav ul {
+                    border-radius: 10px;
+                }
+
+                    nav ul li {
+                        float: none;
+                        width: 100%;
+                        border-right: none;
+                        border-bottom: 1px solid #ffffff;
+                    }
+
+            section,
+            aside {
+                float: none;
+                width: 100%;
+            }
+
+            aside {
+                height: 90px;
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>HEADER</header>
+
+        <nav>
+            <h2>NAVIGATION</h2>
+            <ul>
+                <li><a href="#menu1">menu1</a></li>
+                <li><a href="#menu2">menu2</a></li>
+                <li><a href="#menu3">menu3</a></li>
+                <li><a href="#menu4">menu4</a></li>
+                <li><a href="#menu5">menu5</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section>CONTENT</section>
+            <aside>BANNER</aside>
+        </main>
+
+        <footer>FOOTER</footer>
+    </div>
+</body>
+</html>
+"""
+
+path = Path("/mnt/data/yellow_layout.html")
+path.write_text(html, encoding="utf-8")
+print(path)
