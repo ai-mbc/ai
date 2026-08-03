@@ -1,0 +1,86 @@
+﻿/***** css/shoppingmall.css *****/
+/***** 페이지 초기화(규칙, margin,padding0, a, li..) *****/
+@font-face {
+  font-family: 'Merriweather-Light';
+  src: url(../font/Merriweather-Light.ttf);/*css파일 기준경로설정*/
+}
+@font-face {
+  font-family: 'Merriweather-Regular';
+  src: url(../font/Merriweather-Regular.ttf);
+}
+*{
+  margin: 0; padding: 0;
+  font-family: 'Merriweather-Regular';
+}
+a{
+  text-decoration: none;
+  color:black;
+  display: block;
+}
+li{list-style-type: none;}
+/***** header *****/
+/***** header .gnb *****/
+header .gnb{
+  background-color: black;
+}
+header .gnb a{color:white;}
+header .gnb ul{
+  width: 1000px; margin: 0 auto;
+  overflow: hidden;
+  height: 30px; line-height: 30px; /* 수평 가운데 정렬 */
+}
+header .gnb ul li{
+  float: left;
+  width: 9%;
+  margin: 0 0.5%;
+  text-align: center;
+  /* border: 1px solid red;
+  box-sizing: border-box; 확인용 */
+}
+/***** header .logo *****/
+header .logo{
+  width:200px; margin: 30px auto; /* 상우하좌 30 auto 30 auto 30*/
+  font-size: 2em;
+  border: 1px solid gray;
+  padding: 10px;
+  text-align: center;
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+}
+/***** header .hitmenu *****/
+header .hitmenu ul{
+  width: 1000px; margin: 0 auto 5px;
+  overflow: hidden;
+}
+header .hitmenu ul li{
+  float: right;
+  border: 1px solid black;
+}
+header .hitmenu ul li a{
+  padding: 10px 30px;
+}
+header .hitmenu ul li:first-child{
+  border-radius: 0 10px 10px 0;
+}
+header .hitmenu ul li:last-child{
+  border-radius: 10px 0 0 10px;
+}
+/***** header .lnb *****/
+header .lnb{
+  border-top: 1px dashed #555555;
+  border-bottom: 1px dashed #555555;
+}
+header .lnb ul{
+  width: 1000px; margin: 0 auto;
+  height: 30px; line-height: 30px;
+}
+header .lnb ul li{
+  float: left;
+  width: 11.5%; margin: 0 0.5%;
+  text-align: center;
+}
+/***** #content *****/
+/***** #content .section1 *****/
+/***** #content .section2 *****/
+
+/****** footer *****/

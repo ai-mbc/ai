@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>마이페이지 - 개인정보변경</title>
+
+  <!-- HTML과 같은 폴더에 있는 CSS 파일 연결 -->
+  <link rel="stylesheet" href="mypage.css">
+</head>
+
+<body>
+  <div id="wrap">
+
+    <!-- 상단 내비게이션 -->
+    <nav aria-label="주요 메뉴">
+
+      <div id="nav_left">
+        <ul>
+          <li>
+            <a href="#" class="logo">LOGO</a>
+          </li>
+
+          <li>
+            <a href="#">참여하기</a>
+          </li>
+
+          <li>
+            <a href="#">개설하기</a>
+          </li>
+
+          <li>
+            <a href="#">검색하기</a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="nav_right">
+        <ul>
+          <!--
+          CSS의 float:right 때문에
+          실제 화면에 표시할 순서와 반대로 작성합니다.
+
+          화면 표시:
+          홍길동님 → 로그아웃 → 고객센터
+          -->
+
+          <li>
+            <a href="#">고객센터</a>
+          </li>
+
+          <li>
+            <a href="#">로그아웃</a>
+          </li>
+
+          <li>
+            <a href="#">홍길동님</a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+    <!-- 본문 -->
+    <main id="content">
+
+      <!-- 페이지 제목 -->
+      <div id="title">
+        마이페이지
+      </div>
+
+      <!-- 왼쪽 메뉴 -->
+      <aside id="lnb" aria-label="마이페이지 메뉴">
+        <ul>
+          <li>
+            <a href="#">나의여행</a>
+          </li>
+
+          <li>
+            <a href="#">참여여행</a>
+          </li>
+
+          <li>
+            <a href="#">관심여행</a>
+          </li>
+
+          <li class="active">
+            <a href="#" aria-current="page">개인정보변경</a>
+          </li>
+
+          <li>
+            <a href="#">비밀번호변경</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- 오른쪽 개인정보 변경 영역 -->
+      <section id="my_content">
+
+        <div id="sub_title">
+          개인정보변경
+        </div>
+
+        <form id="modify" action="#" method="post">
+          <table>
+            <tbody>
+
+              <tr>
+                <td>
+                  <label for="name">이름</label>
+                </td>
+
+                <td>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="user_id">아이디</label>
+                </td>
+
+                <td>
+                  <input
+                    id="user_id"
+                    name="user_id"
+                    type="text"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="email">이메일</label>
+                </td>
+
+                <td>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="phone">전화</label>
+                </td>
+
+                <td>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="text"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="birth">생년월일</label>
+                </td>
+
+                <td>
+                  <input
+                    id="birth"
+                    name="birth"
+                    type="text"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="address">주소</label>
+                </td>
+
+                <td>
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                  >
+                </td>
+              </tr>
+
+              <tr>
+                <td colspan="2" class="submit_cell">
+                  <input type="submit" value="저장">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </form>
+
+      </section>
+
+    </main>
+
+    <!-- 하단 영역 -->
+    <footer>
+      footer
+    </footer>
+
+  </div>
+</body>
+</html>
