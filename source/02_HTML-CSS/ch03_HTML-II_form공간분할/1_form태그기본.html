@@ -3,12 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <title></title>
+  <style>
+    table {
+      width: 300px;
+      /*border : 1px solid gray;*/
+      margin: 10px auto; /* 밖여백 : 위우하좌 */
+    }
+  </style>
 </head>
 <body>
-  <form action="http://www.daum.net" method="get">
-    <p>아이디 <input type="text" name="uid" /></p>
-    <p>패스워드 <input type="password" name="upw" /></p>
-    <p><input type="submit" value="로그인" /></p>
+  <form action=""> <!--method="get"-->
+    <table>
+      <tr>
+        <td>아이디</td><td><input type="text" name="uid" /></td>
+      </tr>
+      <tr>
+        <td>패스워드</td><td><input type="password" name="upw" /></td>
+      </tr>
+      <tr><td> </td></tr>
+      <tr>
+        <th colspan="2"><input type="submit" value="로그인" /></th>
+      </tr>
+    </table>
   </form>
 </body>
 </html>
