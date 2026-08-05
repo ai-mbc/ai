@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1.0"
+  />
+  <title>누적점수계산</title>
+
+  <style>
+    body {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      line-height: 1.8;
+      padding: 30px;
+    }
+
+    .result{
+      font-size: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="result" class="result"></div>
+
+  <script>
+    let cnt=0;
+    let total=0;
+    let correctCnt=0;
+    let wrongCnt=0;
+
+    //confirm창에서 확인을 누르는 동안 반복
+    while(confirm('누적할래?')) {
+      cnt++;
+
+      const input=prompt('누적할점수?',"");
+      const score=Number(input);
+
+      //0~100사이의 정상적인 숫자인지 검사
+    if(
+      input !==null &&
+      input.trim() !==""&&
+      Number.isFinite(score)&&
+      score>=0&&
+      score<=100
+    ){
+      total +=score;
+      correctCnt++;
+    } else{
+      wrongCnt++;
+    
+      alert('0점 이상 100점 이하의 숫자를 입력하세요');
+    }
+
+    }
+    //confirm창에서 취소를 누르면 최종결과 출력
+    document.getElementById('result').innerHTML=`
+      <strong>${total}<br>
+        누적점수:${total}<br>
+        점수를 제대로 입력한 횟수:${correctCnt}<br>
+        점수를 잘못 입력한 횟수 : ${wrongCnt}
+        `;
+    
+  </script>
+</body>

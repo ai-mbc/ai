@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+  <title></title>
+  <style>
+    p{text-align: center;}
+  </style>
+  <script>
+    function chk(){
+      // 첫번째 수(frm.su1.value)와 두번째 수를 가져와서 몇번째 수가 얼마 더큰지 alert
+      const su1=Number(document.frm.su1.value);
+      const su2=Number(document.frm.su2.value);
+
+      if(su1>su2){
+        alert("첫번째 수가 두번째 수보다"+(su1-su2)+"더 큽니다.");
+      } else if(su2 > su1){
+        alert("두번째 수가 첫번째 수보다"+(su2-su1)+"더 큽니다.");
+      } else {
+        alert("두 수는 같습니다.")
+      }
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <form name="frm" onsubmit="return chk()">
+    <fieldset>
+      <p>첫번째 수 : <input type="number" name="su1"></p>
+      <p>두번째 수 : <input type="number" name="su2"></p>
+      <p><input type="submit"></p>
+    </fieldset>
+  </form>
+</body>
+</html>
