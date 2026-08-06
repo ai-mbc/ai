@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>배경 이미지 변경</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      min-height: 100vh;
+      box-sizing: border-box;
+
+      /* quiz1.html과 이미지가 같은 폴더에 있음 */
+      background-image: url('./img01.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      color: yellow;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="time"></div>
+  <br />
+  <div id="message">0초</div>
+
+  <script>
+    let cnt = 0;
+
+    const intervalId = setInterval(() => {
+      cnt++;
+
+      /*
+        이미지가 3개이므로 다음과 같이 반복됩니다.
+
+        1초 → img01.png
+        2초 → img02.png
+        3초 → img03.png
+        4초 → img01.png
+        5초 → img02.png
+      */
+      const imageIndex = ((cnt - 1) % 3) + 1;
+
+      const imageNumber = String(imageIndex).padStart(2, '0');
+
+      // quiz1.html과 이미지가 같은 폴더이므로 ./img01.png 사용
+      document.body.style.backgroundImage =
+        `url('./img${imageNumber}.png')`;
+
+      document.getElementById('time').textContent =
+        new Date().toString();
+
+      document.getElementById('message').textContent =
+        `${cnt}초 지남`;
+
+      // 10초가 되면 반복 중지
+      if (cnt >= 10) {
+        clearInterval(intervalId);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
