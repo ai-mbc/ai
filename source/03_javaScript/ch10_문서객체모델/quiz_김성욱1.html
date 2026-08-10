@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>마우스 배경색 변경 퀴즈</title>
+
+  <style>
+    body {
+      background-color: white;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    table {
+      width: 280px;
+      height: 100px;
+      margin: 10px auto;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    td {
+      width: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>quiz: 마우스를 올리면 바탕화면도 해당 색상으로</h3>
+
+  <table>
+    <tr>
+      <td
+        style="background-color: red;"
+        onmouseover="changeColor('red')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: orange;"
+        onmouseover="changeColor('orange')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: yellow;"
+        onmouseover="changeColor('yellow')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: green;"
+        onmouseover="changeColor('green')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: blue;"
+        onmouseover="changeColor('blue')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: navy;"
+        onmouseover="changeColor('navy')"
+        onmouseout="changeColor('white')">
+      </td>
+
+      <td
+        style="background-color: violet;"
+        onmouseover="changeColor('violet')"
+        onmouseout="changeColor('white')">
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    function changeColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+  </script>
+</body>
+</html>
