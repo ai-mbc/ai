@@ -11,7 +11,17 @@
     // 0번째 td부터 6번째 td까지 background-color를 빨주노초파남보 입힌다(window.onload)
         // tag로 가져오기 => 배열(일반for, for-in, forEach이용불가)
         // 선택자로 가져오기 => 배열(일반for, for-in, forEach이용)
-    const bgColorChange = n => {};
+    const color = ['red','orange','yellow','green','blue','navy', 'violet'];
+    window.onload = ()=>{
+      //var tds = document.getElementsByTagName('td'); - 일반for문이나 for-in문
+      var tds = document.querySelectorAll('td');
+      tds.forEach((element, idx) => {
+        element.style.backgroundColor = color[idx]; // td의 바탕색변경
+        // td들의 이벤트
+        element.onmouseover = ()=> document.body.style.backgroundColor = color[idx];
+        element.onmouseout = ()=> document.body.style.backgroundColor = 'white';
+      });
+    };
   </script>
 </head>
 <body>
