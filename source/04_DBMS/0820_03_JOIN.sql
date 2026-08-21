@@ -125,7 +125,11 @@ SELECT * FROM EMP E, DEPT D
 -- ★ <연습문제>
   -- Part1(EQUI JOIN, NON EQUI JOIN)
     --1. 모든 사원에 대한 이름, 부서번호, 부서명을 출력하는 SELECT 문장을 작성하여라.
-
+SELECT E.ENAME,
+       E.DEPTNO,
+       D.DNAME
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
         
     --2. NEW YORK에서 근무하고 있는 사원에 대하여 이름, 업무, 급여, 부서명을 출력
 
