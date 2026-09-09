@@ -106,7 +106,7 @@ select pno, pname, sal, comm
     where comm is null 
     order by sal desc;
     
--- 5. 사번, 이름, 부서번호, 급여. 부서코드 순 정렬 같으면 PAY 큰순
+-- 5. 사번, 이름, 부서번호, 급여. 부서코드 순 정렬 같으면 sal 큰순
 select pno, pname, dno, sal 
 	from person 
     order by dno, sal desc;    
@@ -116,14 +116,31 @@ select pno, pname, dname
 	from person p, division d 
     where p.dno=d.dno;
     
+select pno, pname, dname
+	from person p join division d
+		on p.dno=d.dno;
+    
 -- 7. 사번, 이름, 상사이름
 select w.pno, w.pname, m.pname
 	from person w, person m
     where w.manager=m.pno;
     
--- 8. 사번, 이름, 상사이름(상사가 없는 사람도 출력하되 상사가 없는 경우 ★CEO★로 출력) – oracle과 다른 문법
+select w.pno, w.pname, m.pname
+	from person w join person m
+		on w.manager=m.pno;
 
+-- 8. 사번, 이름, 상사이름(상사가 없는 사람도 출력하되 상사가 없는 경우 ★CEO★로 출력) – oracle과 다른 문법
+select w.pno, w.pname, ifnull(m.pname, '★CEO★') manager
+	from person w left join person m
+		on w.manager=m.pno;
+    
 -- 8-1 사번, 이름, 상사사번(상사가 없으면 ceo로 출력. ifnull함수의 매개변수의 타입이 상이해도 상관없음) – oracle과 다른 문법
+select pno, pname, ifnull(manager, 'ceo') manager
+	from person;
+select pno, pname, if(manager is null, 'ceo', manager) manager
+	from person;
+-- 8-2 사번, 이름, 급여, 고액연봉자(4000이상)or일반연봉가
+select pno, pname, sal, if(sal>=4000, '고액연봉자', '일반연봉자') from person;
 
 -- 9. 이름이 s로 시작하는 사원 이름 (like 이용)
 select pname 
@@ -133,15 +150,30 @@ select pname
 -- 10. 사번, 이름, 급여, 부서명, 상사이름
 select w.pno, w.pname, w.sal,dname, m.pname
 	from division d, person w, person m
-    where d.dno=w.dno and w.manager=m.pno;
+    where d.dno=w.dno && w.manager=m.pno;
+select w.pno, w.pname, w.sal, dname, m.pname
+	from division d 
+		join person w on d.dno=w.dno
+		join person m on w.manager=m.pno;
+select w.pno, w.pname, w.sal, dname, m.pname
+	from division d 
+		join person w on d.dno=w.dno
+		left join person m on w.manager=m.pno; -- 상사자 없는 사람도 출력
+        
+-- oracle과 다른 함수들
+select sysdate(); -- 현재 날짜와 시간
+select current_timestamp();
+select now(); -- select절만으로도 실행
 
+-- date_format(날짜/시간필드, 포맷) => 문자형
+	-- 포맷 : %Y(년도4자리), %y(년도2자리), %m(월2자리), %M(월이름), %d(일2자리)
+           -- %H(24시간), %h(12시간), %p(오전, 오후) %i(분), %s(초)
+select pname, date_format(hiredate, '%Y년%m월%d일 %p %h:%i:%s') from person;
 
+-- format(숫자필드, 소수점자리수)
+select pname, format(sal, 0) sal from person;
 
-
-
-
-
-
-
-
+-- 오라클에서의 연결연산자 || 'smith는 manager다'
+select pname || '는 ' || job || '다' from person; -- mySQL에서의 ||는 OR연산자
+select concat(pname, '는 ', job, '다') from person;
 
