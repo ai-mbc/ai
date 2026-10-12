@@ -7,14 +7,15 @@ __pycache__/
 .vs/
 .env
 IDE/
-/.metadata/
-# 프로젝트 최상위의 허깅페이스 모델 폴더 제외
-/huggingface/
-# 프로젝트 최상위 폴더 제외
-/academy-agent/
-/ev-charging/
+.metadata/
+huggingface/
+academy-agent/
+ev-charging/
 09_Project/
-
+.tmp.driveupload/
+academy-agent/
+.tmp.driveupload/
+typesafe-kiri-demo/
 
 
 
